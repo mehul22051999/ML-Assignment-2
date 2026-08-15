@@ -18,9 +18,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# --------------------------------------------------
+
 # Page configuration
-# --------------------------------------------------
 
 st.set_page_config(
     page_title="Bank Marketing Prediction",
@@ -29,9 +28,7 @@ st.set_page_config(
 )
 
 
-# --------------------------------------------------
 # Load saved models and preprocessing
-# --------------------------------------------------
 
 models = {
     "Logistic Regression":
@@ -57,9 +54,7 @@ feature_columns = joblib.load(
 )
 
 
-# --------------------------------------------------
 # Title
-# --------------------------------------------------
 
 st.title("🏦 Bank Marketing Campaign Prediction")
 
@@ -74,9 +69,8 @@ st.write(
 )
 
 
-# --------------------------------------------------
 # File upload
-# --------------------------------------------------
+
 
 uploaded_file = st.file_uploader(
     "Upload test CSV file",
@@ -99,9 +93,8 @@ if uploaded_file is not None:
     st.dataframe(data.head())
 
 
-    # --------------------------------------------------
     # Check target column
-    # --------------------------------------------------
+
 
     if "y" not in data.columns:
 
@@ -120,9 +113,8 @@ if uploaded_file is not None:
         })
 
 
-        # --------------------------------------------------
         # Encode categorical variables
-        # --------------------------------------------------
+
 
         X_input = pd.get_dummies(
             X_input,
@@ -138,18 +130,14 @@ if uploaded_file is not None:
         )
 
 
-        # --------------------------------------------------
         # Scale the data
-        # --------------------------------------------------
 
         X_input_scaled = scaler.transform(
             X_input
         )
 
 
-        # --------------------------------------------------
         # Model selection
-        # --------------------------------------------------
 
         selected_model_name = st.selectbox(
             "Select a Machine Learning Model",
@@ -161,9 +149,7 @@ if uploaded_file is not None:
         ]
 
 
-        # --------------------------------------------------
         # Make predictions
-        # --------------------------------------------------
 
         y_pred = selected_model.predict(
             X_input_scaled
@@ -174,9 +160,7 @@ if uploaded_file is not None:
         )[:, 1]
 
 
-        # --------------------------------------------------
         # Calculate metrics
-        # --------------------------------------------------
 
         accuracy = accuracy_score(
             y_actual,
@@ -212,9 +196,7 @@ if uploaded_file is not None:
         )
 
 
-        # --------------------------------------------------
         # Display metrics
-        # --------------------------------------------------
 
         st.subheader(
             f"Results: {selected_model_name}"
@@ -256,9 +238,7 @@ if uploaded_file is not None:
         )
 
 
-        # --------------------------------------------------
         # Confusion Matrix
-        # --------------------------------------------------
 
         st.subheader("Confusion Matrix")
 
@@ -285,9 +265,7 @@ if uploaded_file is not None:
         st.pyplot(fig)
 
 
-        # --------------------------------------------------
         # Classification Report
-        # --------------------------------------------------
 
         st.subheader(
             "Classification Report"
